@@ -22,29 +22,16 @@ $task = new Task($db);
 
 if(isset($_GET['task_id']))
 {
-    $data =  $task->read_single_task($_GET['task_id']);
-    
-    if($data->rowCount())
-    {
-        $tasks = [];
+$data = $task->read_single_task($_GET['task_id']);
 
-        // re-aggrange the task data.
-    
-        while($row = $data->fetch(PDO::FETCH_OBJ))
-        {
-            $tasks[$row->task_id] = [
-                'task_id' => $row->task_id,
-                'tasks_name' =>  $row->tasks_name,
-                'tasks_description' =>  $row->tasks_description,
-                'creation_time' =>  $row->creation_time,
-            ];
-        }
-    
-        echo json_encode($tasks);
-    }
-    else
-    {
-        echo json_encode(['message' => ' No task data found']);
-    }
+if($data->rowCount())
+{
+$tasks = $data->fetch(PDO::FETCH_OBJ);
+echo json_encode($tasks);
+}
+else
+{
+echo json_encode(['message' => ' No task data found']);
+}
 }
 

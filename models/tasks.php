@@ -48,31 +48,33 @@ class Task {
 
 
     public function read_single_task($task_id)
-        {
-        $this->task_id = $task_id;
-        // Query to get tasks data.
-
-        $query = 'SELECT
-        t.task_id,
-        t.tasks_name,
-        t.tasks_description,
-        t.creation_time,
-        ch.childTasks_name,
-        ch.tasks_id
-        FROM
-        child_tasks ch LEFT JOIN
-        tasks t
-        ON ch.tasks_id = t.task_id
-        WHERE ch.tasks_id= ?';
-
-        $task = $this->connection->prepare($query);
-        $task->bindParam(1, $this->task_id);
-        $task->execute();
-
-
-        return $task;
-
-        }
+    {
+    $this->task_id = $task_id;
+    // Query to get tasks data.
+    
+    $query = 'SELECT
+    t.task_id,
+    t.tasks_name,
+    t.tasks_description,
+    t.creation_time,
+    ch.childTasks_name,
+    ch.tasks_id
+    FROM
+    tasks t LEFT JOIN
+    child_tasks ch
+    ON t.task_id = ch.tasks_id
+    WHERE t.task_id= ?';
+    
+    $task = $this->connection->prepare($query);
+    
+    //$task->bindParam(9, $this->task_id);
+    
+    $task->execute([$task_id]);
+    
+    
+    return $task;
+    
+    }
 
 
     // Insert a new task.
