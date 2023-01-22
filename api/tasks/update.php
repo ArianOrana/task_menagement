@@ -28,12 +28,11 @@ if(isset($data))
 
     $params = [
         'task_id' => $data->task_id,
-        '$tasks_name' => $data->$tasks_name,
+        'tasks_name' => $data->tasks_name,
         'tasks_description' => $data->tasks_description,
+];
 
-    ];
-
-    if($task->update($params))
+    if($task->update_new_task($params))
     {
         echo json_encode(['message' => 'Task Updated successfully']);
     }

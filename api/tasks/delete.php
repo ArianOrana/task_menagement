@@ -26,7 +26,7 @@ if(isset($data))
 {
      // Deleting post from user input.
 
-    if($post->delete_task($data->task_id))
+    if($task->delete_task($data->task_id))
     {
         echo json_encode(['message' => 'Task Deleted successfully']);
     }
